@@ -8,8 +8,10 @@
   <meta name="author" content="Thomas O'Keeffe">
   <title>Joker</title>
 
+
   <!-- Bootstrap core CSS -->
-  <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
 
   <!-- Custom styles for this template -->
   <link href="/stylesheets/signin.css" rel="stylesheet">
@@ -17,14 +19,29 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-<script src="/javascripts/joker.js"></script>
+  <script src="/javascripts/joker.js"></script>
 </head>
 
 <body class="text-center">
   <div class="main-box">
-    <img class="mb-4" src="/images/logo.jpg" alt="" width="172" height="172">
+    <img class="joker-img" src="/images/logo.jpg" alt="" width="172" height="172">
+
+    <div class="container-sm">
     <button id="jokeButton" class="btn btn-lg btn-primary btn-block jk-button" type="button">Loading Joke ... </button>
+    </div>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">General
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">General</a>
+        <a class="dropdown-item" href="#">Programming</a>
+      </div>
+    </div>
+    
     <p class="mt-5 mb-3 text-muted">&copy; THE JOKER 2021</p>
   </div>
 </body>

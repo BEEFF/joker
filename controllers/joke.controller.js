@@ -47,8 +47,43 @@ exports.total = (req, res) => {
         else {
             let total = data[0]['COUNT(*)'];
             res.send(total.toString());
-            
+
         }
+    });
+};
+
+// Find a single random joke by type
+exports.findByType = (req, res) => {
+    Joke.findByType(req.params.type, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found Joke with id ${req.params.type}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving Joke with id " + req.params.type
+                });
+            }
+        } else res.send(data);
+    });
+};
+
+// Find a single random joke
+// Find a single Joke with a jokeId
+exports.findOneByType = (req, res) => {
+    Joke.findOneByType(req.params.jokeType, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found Joke with type ${req.params.jokeType}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving Joke with type " + req.params.jokeType
+                });
+            }
+        } else res.send(data);
     });
 };
 
@@ -128,4 +163,3 @@ exports.deleteAll = (req, res) => {
         });
     });
 };
-

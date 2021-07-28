@@ -1,7 +1,7 @@
 const sql = require("./db.js");
 
 // constructor
-const Joke = function(Joke) {
+const Joke = function (Joke) {
   this.type = Joke.type;
   this.setup = Joke.setup;
   this.punchline = Joke.punchline;
@@ -15,8 +15,38 @@ Joke.create = (newjoke, result) => {
       return;
     }
 
-    console.log("created Joke: ", { id: res.insertId, ...newjoke });
-    result(null, { id: res.insertId, ...newjoke });
+    console.log("created Joke: ", {
+      id: res.insertId,
+      ...newjoke
+    });
+    result(null, {
+      id: res.insertId,
+      ...newjoke
+    });
+  });
+};
+
+Joke.findOneByType = (jokeType, result) => {
+  console.log("joketype: " + jokeType);
+  sql.query(`SELECT * FROM jokes AS t1 JOIN
+            (SELECT id FROM jokes WHERE type='${jokeType}' 
+            ORDER BY RAND() LIMIT 1) as t2 ON t1.id=t2.id;`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("found Joke: ", res[0]);
+      result(null, res[0]);
+      return;
+    }
+
+    // not found Joke with the id
+    result({
+      kind: "not_found"
+    }, null);
   });
 };
 
@@ -35,7 +65,9 @@ Joke.findById = (jokeId, result) => {
     }
 
     // not found Joke with the id
-    result({ kind: "not_found" }, null);
+    result({
+      kind: "not_found"
+    }, null);
   });
 };
 
@@ -78,12 +110,20 @@ Joke.updateById = (id, Joke, result) => {
 
       if (res.affectedRows == 0) {
         // not found Joke with the id
-        result({ kind: "not_found" }, null);
+        result({
+          kind: "not_found"
+        }, null);
         return;
       }
 
-      console.log("updated Joke: ", { id: id, ...Joke });
-      result(null, { id: id, ...Joke });
+      console.log("updated Joke: ", {
+        id: id,
+        ...Joke
+      });
+      result(null, {
+        id: id,
+        ...Joke
+      });
     }
   );
 };
@@ -98,7 +138,9 @@ Joke.remove = (id, result) => {
 
     if (res.affectedRows == 0) {
       // not found Joke with the id
-      result({ kind: "not_found" }, null);
+      result({
+        kind: "not_found"
+      }, null);
       return;
     }
 

@@ -4,7 +4,6 @@
 
 // Initial Jokestate is punchline as we call getRandomJoke onPageLoad 
 var jokeState = 'punchline';
-var jokeType = 'general';
 
 // Placeholder variables to ensure only one GET request per joke
 var jokeID = "2";
@@ -13,6 +12,10 @@ var punchline = "";
 var totalJokes = 1;
 
 // GENERAL FUNCTIONS
+function generateNewID(min, max) {
+  jokeID = Math.floor(Math.random() * (max - min + 1)) + min;
+  // Get the new joke
+}
 
 // SERVER COMMUNICATION (API requests)
 
@@ -52,18 +55,7 @@ function getTotalJokes() {
 };
 
 function getRandomJoke() {
-  $.ajax({
-    url: "/jokes/random/" + jokeType,
-    cache: false,
-    success: function(res){
-      setup = decodeURIComponent(res['setup']);
-      punchline = decodeURIComponent(res['punchline']);
-      changeJokeButtonText();
-    },
-    error: function(jqXHR, textStatus, error) {
-          console.log("Status: " + textStatus); console.log("Error: " + error);
-    }
-  });
+  getTotalJokes();
 };
 
 function switchJokeState() {
@@ -99,12 +91,7 @@ $(document).ready(function () {
       console.log("Fetching a new joke... ");
       getRandomJoke();
     }
-  });
 
-  $(".dropdown-menu a").click(function(){
-    var res = $(this).text();
-    jokeType = res;
-    $(this).parents('.dropdown').find('.dropdown-toggle').text(res);
   });
 });
 

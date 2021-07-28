@@ -49,8 +49,17 @@ body {
 }
 
 .jk-button {
+  padding: 2%;
   background-color: #4c0065;
   white-space: normal;
+}
+
+.joker-img {
+  padding: 2%;
+}
+
+.dropdown {
+  padding: 2%;
 }
 
 body {

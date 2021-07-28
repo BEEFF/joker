@@ -10,6 +10,9 @@ module.exports = app => {
     // Get total number of jokes
     app.get("/jokes/total", jokes.total);
 
+    // Get a single random joke given joke type
+    app.get("/jokes/random/:jokeType", jokes.findOneByType);
+
     // Retrieve a single Joke with jokeId
     app.get("/jokes/:jokeId", jokes.findOne);
 
